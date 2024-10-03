@@ -8,10 +8,15 @@ import (
 )
 
 func lireMotsDepuisFichier(nomFichier string) ([]string, error) {
-	fichier, err := os.Open(nomFichier)
+	fichier, err := os.Open("function/facile.txt")
 	if err != nil {
 		return nil, err
 	}
+	fichier, err = os.Open("function/difficile.txt")
+	if err != nil {
+		return nil, err
+	}
+
 	defer fichier.Close()
 
 	var mots []string
@@ -21,6 +26,7 @@ func lireMotsDepuisFichier(nomFichier string) ([]string, error) {
 	}
 
 	return mots, scanner.Err()
+
 }
 
 func SelectionnerMot(difficulte string) string {
@@ -37,9 +43,9 @@ func SelectionnerMot(difficulte string) string {
 		nomFichier = "function/difficile.txt"
 	}
 	if difficulte == "Humour noir" {
-		nomFichier = "function/humournoir.txt"
+		nomFichier = "function/humour.txt"
 	} else {
-		nomFichier = "function/humournoir.txt"
+		nomFichier = "function/humour.txt"
 	}
 
 	mots, err := lireMotsDepuisFichier(nomFichier)

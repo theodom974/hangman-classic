@@ -55,7 +55,7 @@ func DemarrerJeu(mot string, tentatives int) {
 		}
 
 		if strings.Compare(string(guesses), mot) == 0 {
-			fmt.Println("Félicitations ! Vous avez trouvé le mot :", mot)
+			fmt.Println("GG a toi !!! tu as trouvé le mot :", mot)
 			return
 		}
 	}
