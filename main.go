@@ -1,7 +1,17 @@
 package main
 
-import hg "hangman/function"
+import (
+	fn"hangman/function"
+	
+)
 
 func main() {
-	hg.Test()
+	niveau := fn.ChoisirNiveau()
+
+	
+	mot := fn.SelectionnerMot(niveau)
+
+	
+	tentatives := 10
+	fn.DemarrerJeu(mot, tentatives)
 }
