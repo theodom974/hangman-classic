@@ -5,10 +5,9 @@ import (
 	"os"
 )
 
-var fichier *os.File
 var err error
 
-func ChoisirNiveau() string {
+func (j *Jeu) ChoisirNiveau() {
 	var niveau string
 
 	fmt.Println("Choisissez un niveau de difficulté (facile / difficile / marque / pays) :")
@@ -16,16 +15,15 @@ func ChoisirNiveau() string {
 	//Niveau de dificulté
 	switch niveau {
 	case "facile":
-		fichier, err = os.Open("function/facile.txt")
+		j.Fichier, err = os.Open("function/facile.txt")
 	case "difficile":
-		fichier, err = os.Open("function/difficile.txt")
-	case "humour":
-		fichier, err = os.Open("function/marque.txt")
-		return niveau
+		j.Fichier, err = os.Open("function/difficile.txt")
+	case "marque":
+		j.Fichier, err = os.Open("function/marque.txt")
 	case "pays":
-		fichier, err = os.Open("")
+		j.Fichier, err = os.Open("function/pays.txt")
 	default:
 		fmt.Println("Niveau non reconnu. Par défaut, facile.")
+		j.ChoisirNiveau()
 	}
-	return "facile"
 }

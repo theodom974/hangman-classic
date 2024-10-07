@@ -1,17 +1,18 @@
 package main
 
 import (
-	fn"hangman/function"
+	fn "hangman/function"
 	
 )
 
 func main() {
-	niveau := fn.ChoisirNiveau()
+	var jeu fn.Jeu
+	jeu.ChoisirNiveau()
 
-	
-	mot := fn.SelectionnerMot(niveau)
+	jeu.LireMotsDepuisFichier(jeu.Fichier)
+	jeu.Mot = jeu.SelectionnerMot()
 
 	
 	tentatives := 10
-	fn.DemarrerJeu(mot, tentatives)
+	fn.DemarrerJeu(jeu.Mot, tentatives)
 }
