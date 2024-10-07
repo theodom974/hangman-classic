@@ -12,7 +12,7 @@ func lireMotsDepuisFichier(nomFichier string) ([]string, error) {
 	if err != nil {
 		return nil, err
 	}
-	fichier, err = os.Open("function/difficile.txt")
+	fichier, err = os.Open("function/facile.txt")
 	if err != nil {
 		return nil, err
 	}
@@ -42,10 +42,10 @@ func SelectionnerMot(difficulte string) string {
 
 		nomFichier = "function/difficile.txt"
 	}
-	if difficulte == "Humour noir" {
-		nomFichier = "function/humour.txt"
+	if difficulte == "marque" {
+		nomFichier = "function/marque.txt"
 	} else {
-		nomFichier = "function/humour.txt"
+		nomFichier = "function/marque.txt"
 	}
 
 	mots, err := lireMotsDepuisFichier(nomFichier)

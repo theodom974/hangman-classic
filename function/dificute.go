@@ -5,13 +5,13 @@ import (
 	"os"
 )
 
-	var fichier *os.File
-	var err error
+var fichier *os.File
+var err error
 
 func ChoisirNiveau() string {
 	var niveau string
 
-	fmt.Println("Choisissez un niveau de difficulté (facile / difficile / humour / pays) :")
+	fmt.Println("Choisissez un niveau de difficulté (facile / difficile / marque / pays) :")
 	fmt.Scanln(&niveau)
 	//Niveau de dificulté
 	switch niveau {
@@ -20,7 +20,7 @@ func ChoisirNiveau() string {
 	case "difficile":
 		fichier, err = os.Open("function/difficile.txt")
 	case "humour":
-		fichier, err = os.Open("function/humour.txt")
+		fichier, err = os.Open("function/marque.txt")
 		return niveau
 	case "pays":
 		fichier, err = os.Open("")
@@ -29,5 +29,3 @@ func ChoisirNiveau() string {
 	}
 	return "facile"
 }
-	
-
