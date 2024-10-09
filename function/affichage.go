@@ -2,9 +2,26 @@ package hangman
 
 import (
 	"fmt"
+	"io/ioutil"
 	"strings"
 )
 
+func lirePositionsJose() ([]string, error) {
+
+	contenu, err := ioutil.ReadFile("bonhomme.txt")
+	if err != nil {
+		return nil, err
+	}
+
+	positions := strings.Split(string(contenu), "\n\n")
+	return positions, nil
+}
+
+func afficherPositionJose(positions []string, tentative int) {
+	if tentative >= 0 && tentative < len(positions) {
+		fmt.Println(positions[10-tentative])
+	}
+}
 func afficherMotActuel(guesses []rune) {
 	fmt.Println("Mot à deviner :", string(guesses))
 }
@@ -21,6 +38,12 @@ func DemarrerJeu(mot string, tentatives int) {
 	}
 
 	lettresUtilisees := make(map[rune]bool)
+
+	positions, err := lirePositionsJose()
+	if err != nil {
+		fmt.Println("Erreur lors de la lecture des positions de José :", err)
+		return
+	}
 
 	for tentatives > 0 {
 		afficherMotActuel(guesses)
@@ -52,10 +75,11 @@ func DemarrerJeu(mot string, tentatives int) {
 
 		if !correct {
 			tentatives--
+			afficherPositionJose(positions, tentatives)
 		}
 
 		if strings.Compare(string(guesses), mot) == 0 {
-			fmt.Println("GG a toi !!! tu as trouvé le mot :", mot)
+			fmt.Println("Bien jouer a toi !!! tu as trouvé le mot :", mot)
 			return
 		}
 	}
