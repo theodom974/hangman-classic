@@ -12,8 +12,6 @@ Membre du groupe:
 Prérequis pour l'installation :
 Avant de lancer le jeu, assurez-vous d’avoir installé les éléments suivants :
 
--Dans le terminal clone le lien suivant ( "
-
--Un terminal (command-line interface) pour exécuter les commandes
+-Dans le terminal clone le lien suivant ( " https://github.com/theodom974/hangman-classic.git " ) ensuite vous faites "git clone https://github.com/theodom974/hangman-classic.git" 
 
 Et enfin pour lancer vous faites la commande "go run ."
