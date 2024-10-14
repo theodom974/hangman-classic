@@ -6,9 +6,9 @@ import (
 	"strings"
 )
 
-func lirePositionsJose() ([]string, error) {
+func lirePositions() ([]string, error) {
 
-	contenu, err := ioutil.ReadFile("bonhomme.txt")
+	contenu, err := ioutil.ReadFile("function/bonhomme.txt")
 	if err != nil {
 		return nil, err
 	}
@@ -17,7 +17,7 @@ func lirePositionsJose() ([]string, error) {
 	return positions, nil
 }
 
-func afficherPositionJose(positions []string, tentative int) {
+func afficherPosition(positions []string, tentative int) {
 	if tentative >= 0 && tentative < len(positions) {
 		fmt.Println(positions[10-tentative])
 	}
@@ -39,9 +39,9 @@ func DemarrerJeu(mot string, tentatives int) {
 
 	lettresUtilisees := make(map[rune]bool)
 
-	positions, err := lirePositionsJose()
+	positions, err := lirePositions()
 	if err != nil {
-		fmt.Println("Erreur lors de la lecture des positions de José :", err)
+		fmt.Println("Erreur lors de la lecture des positions du bonhomme :", err)
 		return
 	}
 
@@ -75,11 +75,11 @@ func DemarrerJeu(mot string, tentatives int) {
 
 		if !correct {
 			tentatives--
-			afficherPositionJose(positions, tentatives)
+			afficherPosition(positions, tentatives)
 		}
 
 		if strings.Compare(string(guesses), mot) == 0 {
-			fmt.Println("Bien jouer a toi !!! tu as trouvé le mot :", mot)
+			fmt.Println("Bien joué a toi !!! tu as trouvé le mot :", mot)
 			return
 		}
 	}
