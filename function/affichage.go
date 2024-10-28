@@ -3,11 +3,12 @@ package hangman
 import (
 	"fmt"
 	"io/ioutil"
+	"math/rand"
 	"strings"
+	"time"
 )
 
 func lirePositions() ([]string, error) {
-
 	contenu, err := ioutil.ReadFile("function/bonhomme.txt")
 	if err != nil {
 		return nil, err
@@ -22,6 +23,7 @@ func afficherPosition(positions []string, tentative int) {
 		fmt.Println(positions[10-tentative])
 	}
 }
+
 func afficherMotActuel(guesses []rune) {
 	fmt.Println("Mot à deviner :", string(guesses))
 }
@@ -30,13 +32,32 @@ func afficherTentativesRestantes(tentatives int) {
 	fmt.Printf("Il vous reste %d tentatives.\n", tentatives)
 }
 
-func DemarrerJeu(mot string, tentatives int) {
-	motRune := []rune(mot)
-	guesses := make([]rune, len(motRune))
-	for i := range guesses {
-		guesses[i] = '_'
+// Initialise le mot à deviner et révèle aléatoirement quelques lettres
+func initialiseMot(mot string, nbLettresRevelees int) []rune {
+	longueurMot := len(mot)
+	revelation := make([]rune, longueurMot)
+
+	// Initialise avec des tirets pour chaque lettre
+	for i := range revelation {
+		revelation[i] = '_'
 	}
 
+	// Révèle aléatoirement certaines lettres
+	rand.Seed(time.Now().UnixNano())
+	if nbLettresRevelees > longueurMot {
+		nbLettresRevelees = longueurMot // Ajuste au cas où il y aurait trop de lettres demandées
+	}
+	indicesReveles := rand.Perm(longueurMot)[:nbLettresRevelees]
+	for _, i := range indicesReveles {
+		revelation[i] = rune(mot[i])
+	}
+
+	return revelation
+}
+
+func DemarrerJeu(mot string, tentatives int) {
+	motRune := []rune(mot)
+	guesses := initialiseMot(mot, 2) // Révèle 2 lettres au hasard
 	lettresUtilisees := make(map[rune]bool)
 
 	positions, err := lirePositions()
@@ -79,7 +100,7 @@ func DemarrerJeu(mot string, tentatives int) {
 		}
 
 		if strings.Compare(string(guesses), mot) == 0 {
-			fmt.Println("Bien joué a toi !!! tu as trouvé le mot :", mot)
+			fmt.Println("Bien joué à toi !!! Tu as trouvé le mot :", mot)
 			return
 		}
 	}
