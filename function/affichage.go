@@ -32,20 +32,17 @@ func afficherTentativesRestantes(tentatives int) {
 	fmt.Printf("Il vous reste %d tentatives.\n", tentatives)
 }
 
-// Initialise le mot à deviner et révèle aléatoirement quelques lettres
 func initialiseMot(mot string, nbLettresRevelees int) []rune {
 	longueurMot := len(mot)
 	revelation := make([]rune, longueurMot)
 
-	// Initialise avec des tirets pour chaque lettre
 	for i := range revelation {
 		revelation[i] = '_'
 	}
 
-	// Révèle aléatoirement certaines lettres
 	rand.Seed(time.Now().UnixNano())
 	if nbLettresRevelees > longueurMot {
-		nbLettresRevelees = longueurMot // Ajuste au cas où il y aurait trop de lettres demandées
+		nbLettresRevelees = longueurMot
 	}
 	indicesReveles := rand.Perm(longueurMot)[:nbLettresRevelees]
 	for _, i := range indicesReveles {
@@ -57,7 +54,7 @@ func initialiseMot(mot string, nbLettresRevelees int) []rune {
 
 func DemarrerJeu(mot string, tentatives int) {
 	motRune := []rune(mot)
-	guesses := initialiseMot(mot, 2) // Révèle 2 lettres au hasard
+	guesses := initialiseMot(mot, 2)
 	lettresUtilisees := make(map[rune]bool)
 
 	positions, err := lirePositions()
