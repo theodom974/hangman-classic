@@ -4,11 +4,11 @@ cabinet
 carreau
 chaise
 classe
-cle
+maison
 coin
 couloir
 dossier
-eau
+video
 ecole
 ecriture
 entree
